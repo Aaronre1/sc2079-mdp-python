@@ -1,5 +1,9 @@
 import pygame
-import enum
+from enum import Enum
+
+WIDTH = 500
+ROWS = 20
+WINDOW = pygame.display.set_mode((WIDTH, WIDTH))
 
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -13,7 +17,7 @@ GREY = (128, 128, 128)
 TURQUOISE = (64, 224, 208)
 
 
-class Face(enum):
+class Face(Enum):
     North = 0
     East = 1
     South = 2
@@ -85,14 +89,58 @@ class Arena:
     def __init__(self, width):
         self.width = width
         self.grid = []
+        self.gap = width // ROWS
         for i in range(width):
             self.grid.append([])
             for j in range(width):
-                cell = Cell(i, j, 1, width)
+                cell = Cell(i, j, self.gap, ROWS)
                 self.grid[i].append(cell)
 
-    def add_obstacle(row, col):
+    def add_obstacle(self, row, col):
         # 3x3 cell
-        # 1 1 1 Entrance
-        # 
+        # 1 1 1 Entrance based on face
+        # default false
+
+        # 2 2 2
+        # 1 1 1
+        # 1 0 1
+        # 1 1 1
+
+        # 0 = obstacle
+        # 1 = clearance
+        # 2 = entrance
         pass
+
+    def remove_obstacle(self, row, col):
+        pass
+
+    def draw(self, win):
+        win.fill(WHITE)
+
+        for row in self.grid:
+            for cell in row:
+                cell.draw(win)
+
+        for i in range(ROWS):
+            pygame.draw.line(win, GREY, (0, i * self.gap), (self.width, i * self.gap))
+            for j in range(ROWS):
+                pygame.draw.line(
+                    win, GREY, (j * self.gap, 0), (j * self.gap, self.width)
+                )
+                
+        pygame.display.update()
+
+def main (window, width):
+    arena = Arena(width)
+    
+    run = True
+    while run:
+        arena.draw(window)
+        for event in pygame.event.get():
+            if event.type is pygame.QUIT:
+                run = False
+    
+    pygame.quit()
+    
+
+main(WINDOW,WIDTH)
