@@ -114,6 +114,9 @@ class Arena:
     def remove_obstacle(self, row, col):
         pass
 
+    def rotate_obstacle(self, row, col):
+        pass
+
     def draw(self, win):
         win.fill(WHITE)
 
@@ -127,20 +130,21 @@ class Arena:
                 pygame.draw.line(
                     win, GREY, (j * self.gap, 0), (j * self.gap, self.width)
                 )
-                
+
         pygame.display.update()
 
-def main (window, width):
+
+def main(window, width):
     arena = Arena(width)
-    
+
     run = True
     while run:
         arena.draw(window)
         for event in pygame.event.get():
             if event.type is pygame.QUIT:
                 run = False
-    
-    pygame.quit()
-    
 
-main(WINDOW,WIDTH)
+    pygame.quit()
+
+
+main(WINDOW, WIDTH)
