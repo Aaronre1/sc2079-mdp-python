@@ -34,7 +34,7 @@ echo "Message" > /dev/rfcomm0
 # TODO
 - [ ] Rpi package
     - [ ] Movement module 
-        - [ ] Decimal to Hex convertor
+        - [x] Decimal to Hex convertor
         - [ ] Forward
             - [ ] forward
             - [ ] half_forward
@@ -46,3 +46,6 @@ echo "Message" > /dev/rfcomm0
     - [ ] Camera module
     - [ ] ImageID receiver module
     
+- [ ] Image Recognition
+    - [ ] 6 & 9 inaccurate (upside down)
+    - [ ] bullseye inaccurate
