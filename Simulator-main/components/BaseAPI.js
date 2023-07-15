@@ -16,7 +16,7 @@ export var methodType = {get : 'GET', post : 'POST', put : 'PUT', delete : 'DELE
 
 export default class BaseAPI {	
 	static JSONRequest(api, method, headers, options, content) {
-		const host = "http://192.168.50.214:5000";
+		const host = "http://10.91.0.168:5000";
 
 		let requestOptions = {
 			method: method,
@@ -41,6 +41,7 @@ export default class BaseAPI {
 								reject(JSON.stringify(res.error));
 							}
 							resolve(res.data);
+							console.log(res.data)
 						})
 						.catch(err => {
 							resolve({});

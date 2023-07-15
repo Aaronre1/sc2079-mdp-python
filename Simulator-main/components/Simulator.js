@@ -211,7 +211,9 @@ export default function Simulator() {
     setObstacles(newObstacles);
   };
 
+  var distanceX = 0
   const compute = () => {
+    
     // Set computing to true, act like a lock
     setIsComputing(true);
     // Call the query function from the API
@@ -219,6 +221,18 @@ export default function Simulator() {
       if (data) {
         // If the data is valid, set the path
         setPath(data.data.path);
+        distanceX = data.data.distance;
+       
+        document.getElementById("distanceX").textContent="Distance: " + distanceX.toString();
+        document.getElementById("timeX").textContent="Time: " + (distanceX * 2.8).toString() + "seconds";
+        
+
+        if (distanceX * 2.8 >= 360) {
+          document.getElementById("timeX").textContent="Time: " + (distanceX * 2.8).toString() + "seconds | EXCEEDED TIME | STIMULATION FAILED";
+
+        }
+
+
         // Set the commands
         const commands = [];
         for (let x of data.data.commands) {
@@ -233,6 +247,7 @@ export default function Simulator() {
       // Set computing to false, release the lock
       setIsComputing(false);
     });
+
   };
 
   const onResetAll = () => {
@@ -424,8 +439,9 @@ export default function Simulator() {
         </button>
         
       </div>
-      
 
+
+      
       {path.length > 0 && (
         <div className="flex flex-row items-center text-center bg-teal-200 p-4 rounded-s shadow-xl my-8">
           <button
@@ -567,6 +583,16 @@ export default function Simulator() {
             </button>
           </label>
         </div>
+      </div>
+
+      <div id="distanceX" className="flex flex-row items-center text-black text-center bg-sky-200 p-4 rounded-s shadow-xl my-8">
+        Distance: {distanceX}
+      </div>
+      <div id="timeX" className="flex flex-row items-center text-black text-center bg-sky-200 p-4 rounded-s shadow-xl my-8">
+        Time: 4.3min
+      </div>
+      <div className="flex flex-row items-center text-black text-center bg-sky-200 p-4 rounded-s shadow-xl my-8">
+        Max: 360 seconds
       </div>
       
     </div>
