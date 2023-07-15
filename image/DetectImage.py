@@ -7,6 +7,7 @@ import cv2
 #filename = 'nine.jpg'
 #filename = 'cc.jpg'
 filename = 'something.jpg'
+ 
 # -- Train Model -- #
 # Load model
 #model = YOLO("yolov8s.pt")

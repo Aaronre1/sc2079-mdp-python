@@ -17,12 +17,12 @@ class ImageServer(object):
 
     def accept(self):
         return self.socket.accept()
-    
-    
-if __name__ == '__main__':
+
+
+if __name__ == "__main__":
     ip = "127.0.0.1"
     port = 12345
-    with ImageServer(ip,port) as s:
+    with ImageServer(ip, port) as s:
         client, addr = s.accept()
         while True:
             data = client.recv(1024)
