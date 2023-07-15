@@ -42,6 +42,10 @@ class BluetoothServer(object):
 
     def accept(self):
         return self.socket.accept()
+    
+    def send(self, message):
+        self.socket.send(message)
+        
 
 
 if __name__ == "__main__":
