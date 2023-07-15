@@ -18,6 +18,7 @@ class Camera(object):
         cam.capture(path)
 
         cam.stop_preview()
+        cam.close()
         print("camera.py capture() to " + path)
         return filename
         # cam.resolution = self.resolution
@@ -29,10 +30,11 @@ class Camera(object):
 
 if __name__ == "__main__":
     cam = Camera()
-    filename = cam.capture("../../../shared/")
+    filename = cam.capture("../../../../shared/")
+    sleep(2)
     print(filename)
     ip = "192.168.1.9"
-    port = "12345"
+    port = 12345
     iclient = ImageClient(ip, port)
-    result = iclient.send(bytes(filename))
+    result = iclient.send(bytes(filename, "utf-8"))
     print(result)

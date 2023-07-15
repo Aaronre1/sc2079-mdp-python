@@ -50,38 +50,68 @@ def send(x, z):
         0x00,
         0xFF,
     ]
-    
+
     SER.write(bytearray(packet))
     time.sleep(DELAY)
-    
+
+
 def forward(x):
     for i in range(0, x):
-        send(120,0)
+        send(120, 0)
+
+
 def backward(x):
     for i in range(0, x):
-        send(-120,0)
+        send(-120, 0)
+
 
 # turn right +1Y +3X
 def right_13():
     for i in range(0, 6):
         send(90, -1000)
-    for i in range(0,5):
-        send(-90,-1000)
-    for i in range(0,3):
-        send(100,0)
-    send(50,-1000)
-    for i in range(0,3):
-        send(100,0)
-        
+    for i in range(0, 5):
+        send(-90, -1000)
+    for i in range(0, 3):
+        send(100, 0)
+    send(50, -1000)
+    for i in range(0, 3):
+        send(100, 0)
+
+
 def left_13():
-    for i in range(0,6):
+    for i in range(0, 6):
         send(90, 1000)
-    for i in range(0,5):
-        send(-90,1000)
-    for i in range(0,3):
-        send(100,0)
-    send(50,1000)
-    for i in range(0,3):
-        send(100,0)    
-    
-    
+    for i in range(0, 5):
+        send(-90, 1000)
+    for i in range(0, 3):
+        send(100, 0)
+    send(50, 1000)
+    for i in range(0, 3):
+        send(100, 0)
+
+
+from camera import Camera
+from communication import ImageClient
+
+
+def checklist():
+    # CONFIG
+    ip = "192.168.1.9"
+    port = 12345
+
+    for i in range(0, 4):
+        # TODO: Move
+
+        # Capture
+        cam = Camera()
+        filename = cam.capture("../../../../shared/")
+        time.sleep(2)
+        iclient = ImageClient(ip, port)
+        result = iclient.send(bytes(filename, "utf-8"))
+        img_id = bytes.decode(result)
+        print("Detected image #" + img_id)
+
+        if result == b"15":
+            continue
+        else:
+            break

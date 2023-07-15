@@ -1,0 +1,10 @@
+path: data/
+train: 'train'
+test:  'test'
+val: 'valid'
+
+#Classes
+nc: 16
+
+#classes names
+names: ['0', '6', '7', '8', '9', 'V', 'W', 'X', 'Y', 'Z', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'Circle', 'Bullseye']
