@@ -10,22 +10,17 @@ class Camera(object):
 
     def capture(self, directory=""):
         cam = PiCamera()
+        cam.resolution = self.resolution
         cam.start_preview()
-
+        sleep(2) #sleep to allow camera to focus
         timestamp = calendar.timegm(gmtime())
         filename = "obstacle_" + str(timestamp) + ".jpg"
         path = directory + filename
         cam.capture(path)
-
         cam.stop_preview()
         cam.close()
         print("camera.py capture() to " + path)
         return filename
-        # cam.resolution = self.resolution
-        # output = PiGRBArray(cam)
-        # cam.capture(output, 'bgr')
-        # src = output.array
-        # print(src)
 
 
 if __name__ == "__main__":

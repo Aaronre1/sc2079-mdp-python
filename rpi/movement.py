@@ -16,23 +16,6 @@ IDLE = [0x5A, 0x0C, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF]
 # Y do not change
 # Z 1000 (left) to -1000 (right)
 
-# def tohex(val, nbits):
-#     return hex((val + (1 << nbits)) % (1 << nbits))
-
-
-# def tobyte(val):
-#     htxt = val[2:].zfill(4)
-#     msb = "0x" + htxt[0:2]
-#     lsb = "0x" + htxt[2:4]
-#     # return msb, lsb
-#     return int(msb, 16), int(lsb, 16)
-
-
-# def convert(val):
-#     valhex = tohex(val, 16)
-#     return tobyte(valhex)
-
-
 def send(x, z):
     xhex = convert(x)
     zhex = convert(z)
@@ -94,14 +77,28 @@ from camera import Camera
 from communication import ImageClient
 
 
+def idle(x):
+    for i in range(0, x):
+        send(0, 0)
+
+
+def bullseye():
+    for i in range(0, 5):
+        send(-120, 500)
+    idle(1)
+    for i in range(0, 8):
+        send(130, 0)
+    idle(1)
+    for i in range(0, 6):
+        send(250, -650)
+
+
 def checklist():
     # CONFIG
     ip = "192.168.1.9"
     port = 12345
 
     for i in range(0, 4):
-        # TODO: Move
-
         # Capture
         cam = Camera()
         filename = cam.capture("../../../../shared/")
@@ -112,6 +109,11 @@ def checklist():
         print("Detected image #" + img_id)
 
         if result == b"15":
+            idle(5)
+            bullseye()
             continue
         else:
             break
+
+if __name__ == "__main__":
+    checklist()
