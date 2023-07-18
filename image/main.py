@@ -10,7 +10,7 @@ DIRECTORY = r"/Volumes/pishare/"
 # TODO: Setup DIRECTORY for Windows
 if __name__ == "__main__":
     ip = socket.gethostbyname(socket.gethostname())
-    ip = "192.168.1.9"
+    ip = "192.168.1.16"
     port = 12345
     print("running ImageServer on " + ip + " PORT: " + str(port))
 
@@ -26,15 +26,17 @@ if __name__ == "__main__":
             print(path)
             # process image
             with Image.open(path) as img:
-                try:
-                    result = MODEL.predict(source=img, save=True, show=False, conf=0.6)
+                # try:
+                    result = MODEL.predict(source=img, save=True, show=True)
                     print(result)
                     labels = torch.tensor(result[0].boxes.cls)
                     label_list = labels.numpy()
+                    print("Label list: ", label_list[0])
                     img_id = "15"
                     if len(label_list) != 0:
-                        img_id = label_list[0]
+                        img_id = str(int(label_list[0]))
                         print("Detected image #" + img_id)
                     client.sendall(bytes(img_id, "utf-8"))
-                except:
-                    client.sendall(b"15")
+                # except:
+                #     print("exception")
+                #     client.sendall(b"15")
