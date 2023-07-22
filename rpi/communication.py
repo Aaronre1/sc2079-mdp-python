@@ -72,6 +72,7 @@ def test_algo():
         "retrying": False,
     }
     url = "http://192.168.1.14:5000/path"
+    url = "http://127.0.0.1:5000/path"
     x = requests.post(url, json=robot_obstacles_positions)
     print(x.text)
 

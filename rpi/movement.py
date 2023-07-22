@@ -16,6 +16,7 @@ IDLE = [0x5A, 0x0C, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF]
 # Y do not change
 # Z 1000 (left) to -1000 (right)
 
+
 def send(x, z):
     xhex = convert(x)
     zhex = convert(z)
@@ -82,6 +83,49 @@ def idle(x):
         send(0, 0)
 
 
+def FW(x):
+    for i in range(0, x):
+        send(129, 0)
+
+
+def BW(x):
+    for i in range(0, x):
+        send(-129, 0)
+
+
+def FR00():
+    for i in range(0, 2):
+        send(-60, -700)
+    for i in range(0, 6):
+        send(85, -780)
+
+
+def FL00():
+    for i in range(0, 3):
+        send(-50, 910)
+    for i in range(0, 6):
+        send(85, 710)
+
+
+def BL00():  # Backward Left
+    for i in range(0, 4):
+        send(-120, -1000)
+    for i in range(0, 1):
+        send(150, -500)
+    for i in range(0, 1):
+        send(-70, -680)
+    send(-20, 0)
+
+
+def BR00():  # Backward Right
+    for i in range(0, 4):
+        send(-120, 980)
+    for i in range(0, 1):
+        send(140, 450)
+    for i in range(0, 1):
+        send(-60, 450)
+
+
 def bullseye():
     for i in range(0, 5):
         send(-120, 500)
@@ -114,6 +158,7 @@ def checklist():
             continue
         else:
             break
+
 
 if __name__ == "__main__":
     checklist()
