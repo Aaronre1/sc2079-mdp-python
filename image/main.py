@@ -27,7 +27,7 @@ if __name__ == "__main__":
             # process image
             with Image.open(path) as img:
                 # try:
-                    result = MODEL.predict(source=img, save=True, show=True)
+                    result = MODEL.predict(source=img, save=True, show=True, conf=0.5)
                     print(result)
                     labels = torch.tensor(result[0].boxes.cls)
                     label_list = labels.numpy()
