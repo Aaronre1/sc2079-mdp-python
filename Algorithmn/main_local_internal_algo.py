@@ -6,6 +6,8 @@ from flask_cors import CORS
 from model import *
 from helper import command_generator
 import json
+from os.path import dirname, abspath
+
 #model = load_model()
 model = None
 def status():
@@ -23,7 +25,14 @@ def local_algo_path_finding(robot_obstacles_positions):
     """
     # Get the json data from the request
     content = robot_obstacles_positions
-
+    
+    # arena_parameter = json.load("algo_arena_parameter.json")
+    directory = dirname(dirname(abspath(__file__)))     
+    with open(directory + '/algo_arena_paremeter.json') as f:
+        arena_parameter = json.load(f)
+    content = arena_parameter
+    
+    
     # Get the obstacles, big_turn, retrying, robot_x, robot_y, and robot_direction from the json data
     obstacles = content['obstacles']
     # big_turn = int(content['big_turn'])

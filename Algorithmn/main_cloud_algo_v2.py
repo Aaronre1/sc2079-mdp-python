@@ -29,15 +29,11 @@ def path_finding():
     :return: a json object with a key "data" and value a dictionary with keys "distance", "path", and "commands"
     """
     # Get the json data from the request
-    
-    # directory = dirname(dirname(abspath(__file__)))     
-    # with open(directory + '/algo_arena_paremeter.json') as f:
-    #     arena_parameter = json.load(f)
-    # content = arena_parameter
-    
     content = request.json
     new_json = content
-        
+    
+    print(content)
+    
     print(content, file=sys.stderr)
 
     # Get the obstacles, big_turn, retrying, robot_x, robot_y, and robot_direction from the json data
