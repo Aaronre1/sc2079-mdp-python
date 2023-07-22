@@ -9,7 +9,8 @@ robot_obstacles_positions = {
                                 'robot_y': 1,
                                 'robot_dir': 0,
                                 'retrying': False
-                               }
+                            }
+
 
 
 local_algo_path_finding(robot_obstacles_positions)
