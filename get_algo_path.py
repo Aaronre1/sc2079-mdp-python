@@ -3,8 +3,8 @@ import requests
 
 robot_obstacles_positions = {
                                 'obstacles': [
-                                    {'x': 5, 'y': 5, 'd': 0, 'id': 3},
-                                    {'x': 12, 'y': 5, 'd': 0, 'id': 7}
+                                    {'x': 9, 'y': 9, 'd': 4, 'id': 1},
+                                    {'x': 10, 'y': 4, 'd': 6, 'id': 2},
                                 ],
                                 'robot_x': 1,
                                 'robot_y': 1,
