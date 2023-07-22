@@ -30,3 +30,27 @@ def tocommand(command: str):
     else:
         val = command[2]
         return (action, int(val))
+
+
+image_map = {
+    "0": "10",
+    "1": "6",
+    "2": "7",
+    "3": "8",
+    "4": "9",
+    "5": "11",
+    "6": "12",
+    "7": "13",
+    "8": "14",
+    "9": "15",
+    "10": "2",
+    "11": "4",
+    "12": "3",
+    "13": "1",
+    "14": "5",
+    "15": "15",
+}
+
+
+def toimageid(img: str):
+    return image_map[img]

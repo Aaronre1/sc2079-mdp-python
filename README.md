@@ -106,19 +106,13 @@ echo "Message" > /dev/rfcomm0
 
 # TODO
 - [ ] Rpi package
-    - [ ] Movement module 
-        - [x] Decimal to Hex convertor
-        - [ ] Forward
-            - [ ] forward
-            - [ ] half_forward
-            - [ ] full_forward
+    - [x] Movement module 
+        - [x] Decimal to Hex converto
     - [ ] Path planner module
         - [ ] Command queue to movement convertor
     - [ ] Arena receiver module
     - [ ] Arena transimitter module
     - [ ] Camera module
     - [ ] ImageID receiver module
-    
-- [ ] Image Recognition
-    - [ ] 6 & 9 inaccurate (upside down)
-    - [ ] bullseye inaccurate
+- [ ] Android x Rpi
+  - [ ] Ping back current position & list of discovered images

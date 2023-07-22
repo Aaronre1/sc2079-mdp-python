@@ -3,12 +3,36 @@ from time import sleep, gmtime
 import calendar
 from communication import ImageClient
 
+class Camera2(object):
+    def __init__(self, resolution=(640, 480)):
+        self.resolution = resolution
+        
+    def __enter__(self):
+        self.cam = PiCamera()
+        self.cam.resolution = self.resolution
+        self.cam.start_preview()
+        sleep(1)
+        return self
+        
+    def __exit__(self):
+        self.cam.stop_preview()
+        self.cam.close()
+        
+    def capture(self,directory=""):
+        timestamp = calendar.timegm(gmtime())
+        filename = "obstacle_" + str(timestamp) + ".jpg"
+        path = directory + filename
+        self.cam.capture(path)
+        print("camera.py capture() to " + path)
+        return filename
+    
 
 class Camera(object):
     def __init__(self, resolution=(640, 480)):
         self.resolution = resolution
 
     def capture(self, directory=""):
+        print("capturing image")
         cam = PiCamera()
         cam.resolution = self.resolution
         cam.start_preview()

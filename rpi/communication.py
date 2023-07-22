@@ -22,8 +22,8 @@ class AlgoClient(object):
         self.url = url
 
     def send(self, arena):
-        result = requests.post(url=self.url, json=arena)
-        x = json.loads(result)
+        result = requests.post(self.url, json=arena)
+        x = json.loads(str(result.text))
         return x
 
 
