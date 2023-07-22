@@ -1,0 +1,18 @@
+{'data': 
+    {'distance': 69.0,
+     'path': [
+         {'x': 1, 'y': 1, 'd': 0, 's': -1},
+         {'x': 1, 'y': 10, 'd': <Direction.NORTH: 0>, 's': -1},
+         {'x': 1, 'y': 11, 'd': <Direction.NORTH: 0>, 's': -1},
+         {'x': 2, 'y': 8, 'd': <Direction.WEST: 6>, 's': -1},
+         {'x': 5, 'y': 9, 'd': <Direction.SOUTH: 4>, 's': 3},
+         {'x': 2, 'y': 8, 'd': <Direction.WEST: 6>, 's': -1},
+         {'x': 9, 'y': 8, 'd': <Direction.WEST: 6>, 's': -1},
+         {'x': 12, 'y': 9, 'd': <Direction.SOUTH: 4>, 's': 7}],
+     
+     'commands': ['FW90', 'FW10', 'BR00', 'BR00', 'SNAP3_C', 'FR00', 
+                             'BW70', 'BR00', 'SNAP7_C', 'FIN']
+      
+    },
+  'error': None
+}

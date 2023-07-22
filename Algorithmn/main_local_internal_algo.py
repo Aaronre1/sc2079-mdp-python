@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from model import *
 from helper import command_generator
-
+import json
 #model = load_model()
 model = None
 def status():
@@ -65,17 +65,44 @@ def local_algo_path_finding(robot_obstacles_positions):
         path_results.append(optimal_path[i].get_dict())
     
     
+    
     final_result = {
             "data": {
-                'distance': distance,
-                'path': path_results,
-                'commands': commands
+                "distance": distance,
+                "path": path_results,
+                "commands": commands
             },
             
             "error": None
             
             }
-    print(final_result)
+    
+    json_final_result = json.dumps(final_result)
+    print(json_final_result)
+    print(final_result['data']['distance'])
+    
+    # count_o = 0
+    # for o in final_result['data']['path']:
+    #     print(o)
+        
+    #     for i in content['obstacles']:
+    #         input_object_id = i['id']
+    #         if input_object_id == o['s']:
+    #             print(input_object_id)
+    #             output_image_id = i['image_id']
+    #             print(output_image_id)
+    #         else:
+    #             output_image_id = '-1'
+        
+    #     final_result['data']['path'][count_o]['object_id'] = final_result['data']['path'][count_o]['s']
+        
+        
+    #     count_o += 1
+    
+    # # for o in json_final_result.items():
+    # #     print(o)
+    # print(json_final_result)
+
     return final_result
 
 
@@ -122,8 +149,8 @@ if __name__ == '__main__':
     
     robot_obstacles_positions = {
                                 'obstacles': [
-                                    {'x': 5, 'y': 5, 'd': 0, 'id': 3},
-                                    {'x': 12, 'y': 5, 'd': 0, 'id': 7}
+                                    {'x': 5, 'y': 5, 'd': 0, 'id': 1},
+                                    {'x': 12, 'y': 5, 'd': 0, 'id': 2}
                                 ],
                                 'robot_x': 1,
                                 'robot_y': 1,

@@ -50,7 +50,7 @@ The server will be running at `localhost:5000`
 * `HEIGHT` - Height of the area (in 10cm units)
 * `ITERATIONS` - Number of iterations to run the algorithm for. Higher number of iterations will result in a more accurate shortest path, but will take longer to run. Useful to tweak if robot is not finding the shortest path.
 * `TURN_RADIUS` - Number of units the robot turns. We set the turns to `3 * TURN_RADIUS, 1 * TURN_RADIUS` units. Can be tweaked in the algorithm
-* `SAFE_COST` - Used to penalise the robot for moving too close to the obstacles. Currently set to `1000`. Take a look at `get_safe_cost` to tweak.
+* `SAFE_COST` - Used to penalise the robot for moving too close to the obstacls. Cuerrently set to `1000`. Take a look at `get_safe_cost` to tweak.
 * `SCREENSHOT_COST` - Used to penalise the robot for taking pictures from a position that is not directly in front of the symbol. 
 
 ### API Endpoints:

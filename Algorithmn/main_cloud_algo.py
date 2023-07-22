@@ -15,6 +15,7 @@ def status():
     This is a health check endpoint to check if the server is running
     :return: a json object with a key "result" and value "ok"
     """
+    
     return jsonify({"result": "ok"})
 
 
@@ -26,6 +27,8 @@ def path_finding():
     """
     # Get the json data from the request
     content = request.json
+    new_json = content
+    
     print(content)
     
     print(content, file=sys.stderr)
