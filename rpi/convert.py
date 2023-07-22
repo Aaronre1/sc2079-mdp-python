@@ -1,3 +1,4 @@
+
 def tohex(val, nbits):
     return hex((val + (1 << nbits)) % (1 << nbits))
 
@@ -13,3 +14,19 @@ def tobyte(val):
 def convert(val):
     valhex = tohex(val, 16)
     return tobyte(valhex)
+
+def tocommand(command:str):
+    #FW90
+    #0123
+    
+    #SNAP3_C
+    #0123456
+    action = command[0:2]
+    if (action == "SN"):
+        snapid = command[4]
+        return (action, snapid)
+    else:
+        val = command
+        
+    return action
+    

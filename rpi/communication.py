@@ -1,8 +1,10 @@
 import socket
+import requests
+import json
 
 
 class ImageClient(object):
-    def __init__(self, ip, port):
+    def __init__(self, ip, port=12345):
         self.ip = ip
         self.port = port
 
@@ -13,6 +15,16 @@ class ImageClient(object):
         result = self.socket.recv(1024)
         self.socket.close()
         return result
+
+
+class AlgoClient(object):
+    def __init__(self, url):
+        self.url = url
+
+    def send(self, arena):
+        result = requests.post(url=self.url, json=arena)
+        x = json.loads(result)
+        return x
 
 
 from bluetooth import *
@@ -36,19 +48,35 @@ class BluetoothServer(object):
             profiles=[SERIAL_PORT_PROFILE],
             protocols=[OBEX_UUID],
         )
+        return self
 
     def __exit__(self, *args):
         self.socket.close()
 
     def accept(self):
         return self.socket.accept()
-    
+
     def send(self, message):
         self.socket.send(message)
-        
 
 
-if __name__ == "__main__":
+def test_algo():
+    robot_obstacles_positions = {
+        "obstacles": [
+            {"x": 5, "y": 5, "d": 0, "id": 3},
+            {"x": 12, "y": 5, "d": 0, "id": 7},
+        ],
+        "robot_x": 1,
+        "robot_y": 1,
+        "robot_dir": 0,
+        "retrying": False,
+    }
+    url = "http://192.168.1.14:5000/path"
+    x = requests.post(url, json=robot_obstacles_positions)
+    print(x.text)
+
+
+def test_bluetooth():
     with BluetoothServer() as b:
         client, info = b.accept()
         while True:
@@ -58,3 +86,7 @@ if __name__ == "__main__":
                 break
             client.sendall(data)
         client.close()
+
+
+if __name__ == "__main__":
+    test_algo()
