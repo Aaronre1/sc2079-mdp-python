@@ -4,13 +4,14 @@ from ultralytics import YOLO
 from PIL import Image
 import torch
 
-MODEL = YOLO("runs/detect/train23/weights/best.pt")
-DIRECTORY = "datasets/data/test/images/"
+MODEL = YOLO("runs/detect/train26/weights/best.pt")
+#DIRECTORY = "datasets/data/test/images/"
 DIRECTORY = r"/Volumes/pishare/"
-# TODO: Setup DIRECTORY for Windows
+IP = "192.168.1.9"
+
 if __name__ == "__main__":
     ip = socket.gethostbyname(socket.gethostname())
-    ip = "192.168.1.16"
+    ip = IP
     port = 12345
     print("running ImageServer on " + ip + " PORT: " + str(port))
 
@@ -26,7 +27,7 @@ if __name__ == "__main__":
             print(path)
             # process image
             with Image.open(path) as img:
-                # try:
+                try:
                     result = MODEL.predict(source=img, save=True, show=True, conf=0.5)
                     print(result)
                     labels = torch.tensor(result[0].boxes.cls)
@@ -37,6 +38,6 @@ if __name__ == "__main__":
                         img_id = str(int(label_list[0]))
                         print("Detected image #" + img_id)
                     client.sendall(bytes(img_id, "utf-8"))
-                # except:
-                #     print("exception")
-                #     client.sendall(b"15")
+                except Exception as e:
+                     print(e)
+                     client.sendall(b"15")

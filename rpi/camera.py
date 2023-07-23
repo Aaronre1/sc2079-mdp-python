@@ -3,7 +3,7 @@ from time import sleep, gmtime
 import calendar
 from communication import ImageClient
 
-class Camera2(object):
+class Camera(object):
     def __init__(self, resolution=(640, 480)):
         self.resolution = resolution
         
@@ -14,7 +14,7 @@ class Camera2(object):
         sleep(1)
         return self
         
-    def __exit__(self):
+    def __exit__(self, *args):
         self.cam.stop_preview()
         self.cam.close()
         
@@ -26,8 +26,8 @@ class Camera2(object):
         print("camera.py capture() to " + path)
         return filename
     
-
-class Camera(object):
+# deprecated
+class Camera2(object):
     def __init__(self, resolution=(640, 480)):
         self.resolution = resolution
 
@@ -48,7 +48,7 @@ class Camera(object):
 
 
 if __name__ == "__main__":
-    cam = Camera()
+    cam = Camera2()
     filename = cam.capture("../../../../shared/")
     sleep(2)
     print(filename)

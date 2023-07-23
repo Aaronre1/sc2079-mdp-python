@@ -31,6 +31,40 @@ from bluetooth import *
 
 
 class BluetoothServer(object):
+    def __init__(self, uuid):
+        self.uuid = uuid
+
+    def __enter__(self):
+        self.socket = BluetoothSocket(RFCOMM)
+        self.socket.bind(("", PORT_ANY))
+        self.socket.listen(1)
+        self.port = self.socket.getsockname()[1]
+
+        advertise_service(
+            self.socket,
+            "MDP-GRP-1",
+            service_id=self.uuid,
+            service_classes=[self.uuid, SERIAL_PORT_CLASS],
+            profiles=[SERIAL_PORT_PROFILE],
+            protocols=[OBEX_UUID],
+        )
+
+        self.client, self.info = self.socket.accept()
+
+        return self
+
+    def __exit__(self, *args):
+        self.socket.close()
+
+    def send(self, message):
+        self.client.sendall(message)
+
+    def recv(self, buffer: int = 1024):
+        msg = bytes.decode(self.client.recv(buffer), "utf-8")
+        return msg
+
+# deprecated
+class BluetoothServer2(object):
     def __init__(self, uuid="94f39d29-7d6d-437d-973b-fba39e49d4ee"):
         self.uuid = uuid
 

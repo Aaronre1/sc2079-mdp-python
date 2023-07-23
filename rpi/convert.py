@@ -48,9 +48,93 @@ image_map = {
     "12": "3",
     "13": "1",
     "14": "5",
-    "15": "15",
+    "15": "0",
 }
 
 
 def toimageid(img: str):
     return image_map[img]
+
+
+def flatten_command(data):
+    commands = data["commands"]
+    paths = data["path"]
+
+    f_cmds = []
+
+    for i in range(len(commands)):
+        cmd = tocommand(commands[i])
+        action, value = cmd[0], cmd[1]
+        if action == "FI":
+            break
+        path = paths[i]
+        direction = path["d"]
+
+        if action == "FW":
+            for i in range(value):
+                p = path.copy()
+
+                if direction == 0:
+                    p["y"] += i
+                elif direction == 2:
+                    p["x"] += i
+                elif direction == 4:
+                    p["y"] -= i
+                elif direction == 6:
+                    p["x"] -= i
+
+                f = {"command": action, "position": p}
+                f_cmds.append(f)
+        elif action == "BW":
+            for i in range(value):
+                p = path.copy()
+                if direction == 0:
+                    p["y"] -= i
+                elif direction == 2:
+                    p["x"] -= i
+                elif direction == 4:
+                    p["y"] += i
+                elif direction == 6:
+                    p["x"] += i
+                f = {"command": action, "position": p}
+                f_cmds.append(f)
+        elif action == "SN":
+            f = {"command": action, "position": path}
+            f_cmds.append(f)
+        else:
+            path = paths[i + 1]
+            f_cmds.append({"command": action, "position": path})
+        print(f_cmds[i])
+
+    return f_cmds
+
+
+if __name__ == "__main__":
+    cmd = {
+        "data": {
+            "commands": [
+                "FW10",
+                "FR00",
+                "FW90",
+                "FW10",
+                "BL00",
+                "BL00",
+                "SNAP1_C",
+                "FIN",
+            ],
+            "distance": 50.0,
+            "path": [
+                {"d": 0, "s": -1, "x": 1, "y": 1},
+                {"d": 0, "s": -1, "x": 1, "y": 2},
+                {"d": 2, "s": -1, "x": 4, "y": 3},
+                {"d": 2, "s": -1, "x": 13, "y": 3},
+                {"d": 2, "s": -1, "x": 14, "y": 3},
+                {"d": 4, "s": -1, "x": 11, "y": 4},
+                {"d": 6, "s": 1, "x": 12, "y": 7},
+            ],
+        },
+    }
+
+    data = cmd["data"]
+    result = flatten_command(data)
+    print(str(result))
