@@ -32,7 +32,7 @@ echo "Message" > /dev/rfcomm0
 ```
 
 
-### Sample Algo Response
+# Sample Algorithm Solution 
 ```JSON
 {
   "data": {
@@ -104,15 +104,13 @@ echo "Message" > /dev/rfcomm0
 }
 ```
 
-# TODO
-- [ ] Rpi package
-    - [x] Movement module 
-        - [x] Decimal to Hex converto
-    - [ ] Path planner module
-        - [ ] Command queue to movement convertor
-    - [ ] Arena receiver module
-    - [ ] Arena transimitter module
-    - [ ] Camera module
-    - [ ] ImageID receiver module
-- [ ] Android x Rpi
-  - [ ] Ping back current position & list of discovered images
+# Full Run Setup
+1. Connect to RPi WiFi AP 
+1. Connect & mount to shared drive as PiShare
+1. Start Algorithm server
+1. Start Image server
+1. VNC into RPi 
+1. Change directory to rpi module folder
+1. Run `sudo python3 main.py`
+1. Enable bluetooth discoverability
+1. Connect to RPi from Android App
