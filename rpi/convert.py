@@ -59,15 +59,18 @@ def toimageid(img: str):
 def flatten_command(data):
     commands = data["commands"]
     paths = data["path"]
-
+    print(paths)
     f_cmds = []
+
+    step = 0  # do not increment if action == "SN"
 
     for i in range(len(commands)):
         cmd = tocommand(commands[i])
         action, value = cmd[0], cmd[1]
         if action == "FI":
             break
-        path = paths[i]
+        path = paths[step]
+        step += 1
         direction = path["d"]
 
         if action == "FW":
@@ -101,8 +104,9 @@ def flatten_command(data):
         elif action == "SN":
             f = {"command": action, "position": path}
             f_cmds.append(f)
+            step -= 1
         else:
-            path = paths[i + 1]
+            path = paths[step]
             f_cmds.append({"command": action, "position": path})
         print(f_cmds[i])
 

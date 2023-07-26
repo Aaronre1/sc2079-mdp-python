@@ -124,6 +124,7 @@ def BR00():  # Backward Right
         send(140, 450)
     for i in range(0, 1):
         send(-60, 450)
+    send(20, 0)
 
 
 def bullseye():
