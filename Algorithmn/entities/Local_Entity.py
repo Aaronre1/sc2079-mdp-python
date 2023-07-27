@@ -78,11 +78,6 @@ class Obstacle(CellState):
         return self.x == other.x and self.y == other.y and self.direction == other.direction
 
     def get_view_state(self, retrying) -> List[CellState]:
-        """Constructs the list of CellStates from which the robot can view the symbol on the obstacle
-
-        Returns:
-            List[CellState]: Valid cell states where robot can be positioned to view the symbol on the obstacle
-        """
         cells = []
 
         # If the obstacle is facing north, then robot's cell state must be facing south
@@ -96,13 +91,6 @@ class Obstacle(CellState):
                 if is_valid(self.x, self.y + 2 + EXPANDED_CELL * 2):
                     cells.append(CellState(
                         self.x, self.y + 2 + EXPANDED_CELL * 2, Direction.SOUTH, self.obstacle_id, 0))
-
-                # Or (x + 1, y + 3)
-                # if is_valid(self.x + 1, self.y + 1 + EXPANDED_CELL * 2):
-                #     cells.append(CellState(self.x + 1, self.y + 1 + EXPANDED_CELL * 2, Direction.SOUTH, self.obstacle_id, SCREENSHOT_COST*10))
-                # # Or (x - 1, y + 3)
-                # if is_valid(self.x - 1, self.y + 1 + EXPANDED_CELL * 2):
-                #     cells.append(CellState(self.x - 1, self.y + 1 + EXPANDED_CELL * 2, Direction.SOUTH, self.obstacle_id, SCREENSHOT_COST*10))
 
                 # Or (x + 1, y + 4)
                 if is_valid(self.x + 1, self.y + 2 + EXPANDED_CELL * 2):

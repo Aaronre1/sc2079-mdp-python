@@ -324,17 +324,6 @@ class Grid:
         return self.obstacles
 
     def reachable(self, x: int, y: int, turn=False, preTurn=False) -> bool:
-        """Checks whether the given x,y coordinate is reachable/safe. Criterion is as such:
-        - Must be at least 4 units away in total (x+y) from the obstacle
-        - Greater distance (x or y distance) must be at least 3 units away from obstacle
-
-        Args:
-            x (int): _description_
-            y (int): _description_
-
-        Returns:
-            bool: _description_
-        """
         
         if not self.is_valid_coord(x, y):
             return False
@@ -398,11 +387,6 @@ class Grid:
         return self.is_valid_coord(state.x, state.y)
 
     def get_view_obstacle_positions(self, retrying) -> List[List[CellState]]:
-        """
-        This function return a list of desired states for the robot to achieve based on the obstacle position and direction.
-        The state is the position that the robot can see the image of the obstacle and is safe to reach without collision
-        :return: [[CellState]]
-        """
         # print(f"Inside get_view_obstacle_positions: retrying = {retrying}")
         optimal_positions = []
         for obstacle in self.obstacles:

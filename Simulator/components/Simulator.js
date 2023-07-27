@@ -178,40 +178,40 @@ export default function Simulator() {
       id: generateNewID(),
     });
 
+    // newObstacles.push({
+    //   x: 9,
+    //   y: 9,
+    //   d: 4,
+    //   id: generateNewID(),
+    // });
+
     newObstacles.push({
-      x: 9,
-      y: 9,
-      d: 4,
+      x: 15,
+      y: 4,
+      d: 6,
       id: generateNewID(),
     });
 
-    // newObstacles.push({
-    //   x: 3,
-    //   y: 10,
-    //   d: 4,
-    //   id: generateNewID(),
-    // });
+    newObstacles.push({
+      x: 12,
+      y: 10,
+      d: 2,
+      id: generateNewID(),
+    });
 
-    // newObstacles.push({
-    //   x: 17,
-    //   y: 3,
-    //   d: 6,
-    //   id: generateNewID(),
-    // });
+    newObstacles.push({
+      x: 13,
+      y: 17,
+      d: 2,
+      id: generateNewID(),
+    });
 
-    // newObstacles.push({
-    //   x: 6,
-    //   y: 7,
-    //   d: 0,
-    //   id: generateNewID(),
-    // });
-
-    // newObstacles.push({
-    //   x: 13,
-    //   y: 16,
-    //   d: 4,
-    //   id: generateNewID(),
-    // });
+    newObstacles.push({
+      x: 13,
+      y: 16,
+      d: 4,
+      id: generateNewID(),
+    });
 
 
     // Set the obstacles to the new array
